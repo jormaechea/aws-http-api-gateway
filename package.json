@@ -1,0 +1,35 @@
+{
+  "name": "aws-http-api-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "sls offline",
+    "coverage": "nyc npm test",
+    "coverage:report": "nyc npm run test:report",
+    "lint": "eslint ./src ./tests",
+    "test": "export TEST_ENV=true; mocha --exit -R nyan --recursive tests/unit/",
+    "test-watch": "npm test -- -w",
+    "build": "npm run environment-build",
+    "validate-schema": "lint-openapi -s openapi-schema/api.yml",
+    "validate-schema:ci": "npm run validate-schema -- --no_colors",
+    "test-schema": "npx redoc-cli serve openapi-schema/api.yml"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.2.3",
+    "ibm-openapi-validator": "^0.24.1",
+    "mocha": "^7.1.0",
+    "nyc": "^15.0.0",
+    "redoc-cli": "^0.9.6",
+    "sinon": "^9.0.0"
+  },
+  "dependencies": {
+    "amazon-api-gateway-querystring": "^1.0.5"
+  }
+}

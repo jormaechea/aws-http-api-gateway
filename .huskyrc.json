@@ -1,0 +1,5 @@
+{
+	"hooks": {
+		"pre-commit": "./hooks/pre-commit $HUSKY_GIT_PARAMS"
+	}
+}

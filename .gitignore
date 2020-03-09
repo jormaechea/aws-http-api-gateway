@@ -1,0 +1,6 @@
+node_modules/
+
+# Tests reports
+.nyc_output/
+coverage/
+test-reports/
