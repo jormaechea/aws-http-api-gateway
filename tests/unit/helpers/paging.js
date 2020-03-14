@@ -4,7 +4,8 @@ const assert = require('assert').strict;
 
 const {
 	helpers: {
-		Paging
+		Paging,
+		PagingError
 	}
 } = require('../../../lib');
 
@@ -17,44 +18,44 @@ describe('Helpers', () => {
 
 				it('Should throw if page number is not a number', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams('invalid-number'));
+					assert.throws(() => paging.parseRequestPagingParams('invalid-number'), PagingError);
 				});
 
 				it('Should throw if page number is not an integer', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams(1.5));
+					assert.throws(() => paging.parseRequestPagingParams(1.5), PagingError);
 				});
 
 				it('Should throw if page number is lower than one', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams(0));
-					assert.throws(() => paging.parseRequestPagingParams(-10));
+					assert.throws(() => paging.parseRequestPagingParams(0), PagingError);
+					assert.throws(() => paging.parseRequestPagingParams(-10), PagingError);
 				});
 
 				it('Should throw if page size is not a number', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams(null, 'invalid-number'));
+					assert.throws(() => paging.parseRequestPagingParams(null, 'invalid-number'), PagingError);
 				});
 
 				it('Should throw if page size is not an integer', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams(null, 1.5));
+					assert.throws(() => paging.parseRequestPagingParams(null, 1.5), PagingError);
 				});
 
 				it('Should throw if page size is lower than one', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams(null, 0));
-					assert.throws(() => paging.parseRequestPagingParams(null, -10));
+					assert.throws(() => paging.parseRequestPagingParams(null, 0), PagingError);
+					assert.throws(() => paging.parseRequestPagingParams(null, -10), PagingError);
 				});
 
 				it('Should throw if page size is higher than max size', () => {
 					const paging = new Paging();
-					assert.throws(() => paging.parseRequestPagingParams(null, 200));
+					assert.throws(() => paging.parseRequestPagingParams(null, 200), PagingError);
 				});
 
 				it('Should throw if page size is higher than provided size', () => {
 					const paging = new Paging(null, 2);
-					assert.throws(() => paging.parseRequestPagingParams(null, 5));
+					assert.throws(() => paging.parseRequestPagingParams(null, 5), PagingError);
 				});
 			});
 

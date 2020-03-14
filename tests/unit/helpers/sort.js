@@ -4,7 +4,8 @@ const assert = require('assert').strict;
 
 const {
 	helpers: {
-		Sort
+		Sort,
+		SortError
 	}
 } = require('../../../lib');
 
@@ -25,17 +26,17 @@ describe('Helpers', () => {
 			context('When an invalid sort field or criteria is received', () => {
 				it('Should throw if no sortable fields are set', () => {
 					const sort = new Sort();
-					assert.throws(() => sort.parseRequestSortParams('my-field'));
+					assert.throws(() => sort.parseRequestSortParams('my-field'), SortError);
 				});
 
 				it('Should throw if sort field is not in sortable fields', () => {
 					const sort = new Sort(['other-field']);
-					assert.throws(() => sort.parseRequestSortParams('my-field'));
+					assert.throws(() => sort.parseRequestSortParams('my-field'), SortError);
 				});
 
 				it('Should throw if sort criteria is not valid', () => {
 					const sort = new Sort(['my-field']);
-					assert.throws(() => sort.parseRequestSortParams('my-field', 'invalid'));
+					assert.throws(() => sort.parseRequestSortParams('my-field', 'invalid'), SortError);
 				});
 			});
 
