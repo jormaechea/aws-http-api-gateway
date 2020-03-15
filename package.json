@@ -20,15 +20,15 @@
   "license": "ISC",
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
     "husky": "^4.2.3",
-    "ibm-openapi-validator": "^0.24.1",
+    "ibm-openapi-validator": "^0.24.3",
     "lodash.clonedeep": "^4.5.0",
     "mocha": "^7.1.0",
     "nyc": "^15.0.0",
     "redoc-cli": "^0.9.6",
-    "sinon": "^9.0.0"
+    "sinon": "^9.0.1"
   },
   "dependencies": {
     "amazon-api-gateway-querystring": "^1.0.5"
