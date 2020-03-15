@@ -35,17 +35,13 @@ describe('API', () => {
 		}
 	};
 
-	// afterEach(() => {
-	// 	sinon.restore();
-	// });
-
 	class MyApi extends Api {
 		process() {
 			this.setStatusCode(400);
 			this.setBody({ my: 'response' });
 			this.setHeaders({
-				'Content-Type': 'application/json',
-				'X-Response-Header': 'All good'
+				'content-type': 'application/json',
+				'x-response-header': 'All good'
 			});
 		}
 	}
@@ -114,8 +110,9 @@ describe('API', () => {
 			assert.deepStrictEqual(myApi.response, {
 				statusCode: 400,
 				headers: {
-					'Content-Type': 'application/json',
-					'X-Response-Header': 'All good'
+					'x-powered-by': 'aws-http-api-gateway',
+					'content-type': 'application/json',
+					'x-response-header': 'All good'
 				},
 				body: {
 					my: 'response'
