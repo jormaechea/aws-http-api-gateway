@@ -18,11 +18,11 @@ describe('Get One Api', () => {
 		}
 	};
 
-	let fetcher;
+	let dataConnector;
 
 	class MyGetOneApi extends GetOneApi {
-		get fetcher() {
-			return fetcher;
+		get dataConnector() {
+			return dataConnector;
 		}
 	}
 
@@ -43,7 +43,7 @@ describe('Get One Api', () => {
 		it('Should reject if pathParameters is not set', async () => {
 
 			class MyApiWithoutGetOne extends GetOneApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						getOne: () => Promise.resolve({})
 					};
@@ -57,7 +57,7 @@ describe('Get One Api', () => {
 		it('Should reject if pathParameters.id is not set', async () => {
 
 			class MyApiWithoutGetOne extends GetOneApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						getOne: () => Promise.resolve({})
 					};
@@ -70,15 +70,15 @@ describe('Get One Api', () => {
 			await assert.rejects(() => runApi(myApi));
 		});
 
-		it('Should reject with a ConfigurationError if fetcher is not set', async () => {
+		it('Should reject with a ConfigurationError if dataConnector is not set', async () => {
 			const myApi = new GetOneApi(deepClone(fullRequest));
 			await assert.rejects(() => runApi(myApi), ConfigurationError);
 		});
 
-		it('Should reject with a ConfigurationError if fetcher has no getOne property', async () => {
+		it('Should reject with a ConfigurationError if dataConnector has no getOne property', async () => {
 
 			class MyApiWithoutGetOne extends GetOneApi {
-				get fetcher() {
+				get dataConnector() {
 					return {};
 				}
 			}
@@ -87,10 +87,10 @@ describe('Get One Api', () => {
 			await assert.rejects(() => runApi(myApi), ConfigurationError);
 		});
 
-		it('Should reject with a ConfigurationError if fetcher getOne property is not a function', async () => {
+		it('Should reject with a ConfigurationError if dataConnector getOne property is not a function', async () => {
 
 			class MyApiWithoutGetOne extends GetOneApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						getOne: 'invalidGetter'
 					};
@@ -101,12 +101,12 @@ describe('Get One Api', () => {
 			await assert.rejects(() => runApi(myApi), ConfigurationError);
 		});
 
-		it('Should reject if fetcher getOne method rejects', async () => {
+		it('Should reject if dataConnector getOne method rejects', async () => {
 
-			const rejection = new Error('Fetcher rejected');
+			const rejection = new Error('dataConnector rejected');
 
 			class MyApiWithoutGetOne extends GetOneApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						getOne: () => Promise.reject(rejection)
 					};
@@ -120,7 +120,7 @@ describe('Get One Api', () => {
 		it('Should set a status code 404 and reject if no record is fetched', async () => {
 
 			class MyApiWithoutGetOne extends GetOneApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						getOne: () => Promise.resolve()
 					};
@@ -134,23 +134,23 @@ describe('Get One Api', () => {
 		});
 	});
 
-	describe('Fetcher params', () => {
+	describe('dataConnector params', () => {
 
 		afterEach(() => {
 			sinon.restore();
 		});
 
-		it('Should pass the ID from pathParameters to the fetcher', async () => {
+		it('Should pass the ID from pathParameters to the dataConnector', async () => {
 
-			fetcher = {
+			dataConnector = {
 				getOne: sinon.fake.resolves([])
 			};
 
 			const myApi = new MyGetOneApi(deepClone(fullRequest));
 			await runApi(myApi);
 
-			sinon.assert.calledOnce(fetcher.getOne);
-			sinon.assert.calledWithExactly(fetcher.getOne, 10);
+			sinon.assert.calledOnce(dataConnector.getOne);
+			sinon.assert.calledWithExactly(dataConnector.getOne, 10);
 		});
 	});
 
@@ -164,7 +164,7 @@ describe('Get One Api', () => {
 
 		it('Should return the record as it was fetched if no formatting hook is configured', async () => {
 
-			fetcher = {
+			dataConnector = {
 				getOne: sinon.fake.resolves(deepClone(sampleRecord))
 			};
 
@@ -174,7 +174,7 @@ describe('Get One Api', () => {
 			assert.deepStrictEqual(response.statusCode, 200);
 			assert.deepStrictEqual(response.body, sampleRecord);
 
-			sinon.assert.calledOnce(fetcher.getOne);
+			sinon.assert.calledOnce(dataConnector.getOne);
 		});
 
 		it('Should call the formatRecord hook once return it\'s return value', async () => {
@@ -187,7 +187,7 @@ describe('Get One Api', () => {
 
 			sinon.spy(MyGetOneApiWithHook.prototype, 'formatRecord');
 
-			fetcher = {
+			dataConnector = {
 				getOne: sinon.fake.resolves(deepClone(sampleRecord))
 			};
 
@@ -197,7 +197,7 @@ describe('Get One Api', () => {
 			assert.deepStrictEqual(response.statusCode, 200);
 			assert.deepStrictEqual(response.body, 10);
 
-			sinon.assert.calledOnce(fetcher.getOne);
+			sinon.assert.calledOnce(dataConnector.getOne);
 
 			sinon.assert.calledOnce(MyGetOneApiWithHook.prototype.formatRecord);
 			sinon.assert.calledWithExactly(MyGetOneApiWithHook.prototype.formatRecord, sampleRecord);

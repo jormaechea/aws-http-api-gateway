@@ -23,11 +23,11 @@ describe('Get Many Api', () => {
 		}
 	};
 
-	let fetcher;
+	let dataConnector;
 
 	class MyGetManyApi extends GetManyApi {
-		get fetcher() {
-			return fetcher;
+		get dataConnector() {
+			return dataConnector;
 		}
 	}
 
@@ -45,15 +45,15 @@ describe('Get Many Api', () => {
 
 	describe('Errors', () => {
 
-		it('Should reject with a ConfigurationError if fetcher is not set', async () => {
+		it('Should reject with a ConfigurationError if dataConnector is not set', async () => {
 			const myApi = new GetManyApi({});
 			await assert.rejects(() => runApi(myApi), ConfigurationError);
 		});
 
-		it('Should reject with a ConfigurationError if fetcher has no get property', async () => {
+		it('Should reject with a ConfigurationError if dataConnector has no get property', async () => {
 
 			class MyApiWithoutGet extends GetManyApi {
-				get fetcher() {
+				get dataConnector() {
 					return {};
 				}
 			}
@@ -62,10 +62,10 @@ describe('Get Many Api', () => {
 			await assert.rejects(() => runApi(myApi), ConfigurationError);
 		});
 
-		it('Should reject with a ConfigurationError if fetcher get property is not a function', async () => {
+		it('Should reject with a ConfigurationError if dataConnector get property is not a function', async () => {
 
 			class MyApiWithoutGet extends GetManyApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						get: 'invalidGetter'
 					};
@@ -76,12 +76,12 @@ describe('Get Many Api', () => {
 			await assert.rejects(() => runApi(myApi), ConfigurationError);
 		});
 
-		it('Should reject if fetcher get method rejects', async () => {
+		it('Should reject if dataConnector get method rejects', async () => {
 
-			const rejection = new Error('Fetcher rejected');
+			const rejection = new Error('dataConnector rejected');
 
 			class MyApiWithoutGet extends GetManyApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						get: () => Promise.reject(rejection)
 					};
@@ -95,7 +95,7 @@ describe('Get Many Api', () => {
 		it('Should reject if a sort param is sent and no sortable fields are defined', async () => {
 
 			class MyApiWithoutCustomization extends GetManyApi {
-				get fetcher() {
+				get dataConnector() {
 					return {
 						get: () => Promise.resolve([])
 					};
@@ -111,7 +111,7 @@ describe('Get Many Api', () => {
 		});
 	});
 
-	describe('Fetcher params', () => {
+	describe('dataConnector params', () => {
 
 		afterEach(() => {
 			sinon.restore();
@@ -126,15 +126,15 @@ describe('Get Many Api', () => {
 				}
 			}
 
-			fetcher = {
+			dataConnector = {
 				get: sinon.fake.resolves([])
 			};
 
 			const myApi = new MyFilterableGetManyApi({});
 			await runApi(myApi);
 
-			sinon.assert.calledOnce(fetcher.get);
-			sinon.assert.calledWithExactly(fetcher.get, {
+			sinon.assert.calledOnce(dataConnector.get);
+			sinon.assert.calledWithExactly(dataConnector.get, {
 				filters: {},
 				pageNumber: 1,
 				pageSize: 10
@@ -154,15 +154,15 @@ describe('Get Many Api', () => {
 				}
 			}
 
-			fetcher = {
+			dataConnector = {
 				get: sinon.fake.resolves([])
 			};
 
 			const myApi = new MyFullGetManyApi(deepClone(fullRequest));
 			await runApi(myApi);
 
-			sinon.assert.calledOnce(fetcher.get);
-			sinon.assert.calledWithExactly(fetcher.get, {
+			sinon.assert.calledOnce(dataConnector.get);
+			sinon.assert.calledWithExactly(dataConnector.get, {
 				filters: {
 					foo: {
 						equal: 'bar'
@@ -189,7 +189,7 @@ describe('Get Many Api', () => {
 
 		it('Should return the records as they were fetched if no formatting hook is configured', async () => {
 
-			fetcher = {
+			dataConnector = {
 				get: sinon.fake.resolves(deepClone(sampleRecords))
 			};
 
@@ -199,7 +199,7 @@ describe('Get Many Api', () => {
 			assert.deepStrictEqual(response.statusCode, 200);
 			assert.deepStrictEqual(response.body, sampleRecords);
 
-			sinon.assert.calledOnce(fetcher.get);
+			sinon.assert.calledOnce(dataConnector.get);
 		});
 
 		it('Should call the formatRecords hook once with all the records and return it\'s return value', async () => {
@@ -212,7 +212,7 @@ describe('Get Many Api', () => {
 
 			sinon.spy(MyGetManyApiWithHook.prototype, 'formatRecords');
 
-			fetcher = {
+			dataConnector = {
 				get: sinon.fake.resolves(deepClone(sampleRecords))
 			};
 
@@ -222,7 +222,7 @@ describe('Get Many Api', () => {
 			assert.deepStrictEqual(response.statusCode, 200);
 			assert.deepStrictEqual(response.body, [1, 2]);
 
-			sinon.assert.calledOnce(fetcher.get);
+			sinon.assert.calledOnce(dataConnector.get);
 
 			sinon.assert.calledOnce(MyGetManyApiWithHook.prototype.formatRecords);
 			sinon.assert.calledWithExactly(MyGetManyApiWithHook.prototype.formatRecords, sampleRecords);
@@ -238,7 +238,7 @@ describe('Get Many Api', () => {
 
 			sinon.spy(MyGetManyApiWithHook.prototype, 'formatRecord');
 
-			fetcher = {
+			dataConnector = {
 				get: sinon.fake.resolves(deepClone(sampleRecords))
 			};
 
@@ -248,7 +248,7 @@ describe('Get Many Api', () => {
 			assert.deepStrictEqual(response.statusCode, 200);
 			assert.deepStrictEqual(response.body, [1, 2]);
 
-			sinon.assert.calledOnce(fetcher.get);
+			sinon.assert.calledOnce(dataConnector.get);
 
 			sinon.assert.calledTwice(MyGetManyApiWithHook.prototype.formatRecord);
 			sinon.assert.calledWithExactly(MyGetManyApiWithHook.prototype.formatRecord.getCall(0), sampleRecords[0]);
@@ -270,7 +270,7 @@ describe('Get Many Api', () => {
 			sinon.spy(MyGetManyApiWithHooks.prototype, 'formatRecords');
 			sinon.spy(MyGetManyApiWithHooks.prototype, 'formatRecord');
 
-			fetcher = {
+			dataConnector = {
 				get: sinon.fake.resolves(deepClone(sampleRecords))
 			};
 
@@ -280,7 +280,7 @@ describe('Get Many Api', () => {
 			assert.deepStrictEqual(response.statusCode, 200);
 			assert.deepStrictEqual(response.body, ['The ID is 1', 'The ID is 2']);
 
-			sinon.assert.calledOnce(fetcher.get);
+			sinon.assert.calledOnce(dataConnector.get);
 
 			sinon.assert.calledOnce(MyGetManyApiWithHooks.prototype.formatRecords);
 			sinon.assert.calledWithExactly(MyGetManyApiWithHooks.prototype.formatRecords, sampleRecords);
