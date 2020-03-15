@@ -1,7 +1,7 @@
 {
   "name": "aws-http-api-gateway",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Framework to handle AWS HTTP APIs with AWS Lambda",
   "main": "lib/index.js",
   "scripts": {
     "start": "sls offline",
@@ -9,14 +9,22 @@
     "coverage:report": "nyc npm run test:report",
     "lint": "eslint ./lib ./tests",
     "test": "export TEST_ENV=true; mocha --exit -R nyan --recursive tests/unit/",
-    "test-watch": "npm test -- -w",
-    "build": "npm run environment-build",
-    "validate-schema": "lint-openapi -s openapi-schema/api.yml",
-    "validate-schema:ci": "npm run validate-schema -- --no_colors",
-    "test-schema": "npx redoc-cli serve openapi-schema/api.yml"
+    "test-watch": "npm test -- -w"
   },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "lib/"
+  ],
+  "keywords": [
+    "aws",
+    "api gateway",
+    "api",
+    "framework",
+    "api framework",
+    "http api",
+    "serverless",
+    "api gateway v2"
+  ],
+  "author": "Joaquín Ormaechea (https://github.com/jormaechea)",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^6.8.0",
