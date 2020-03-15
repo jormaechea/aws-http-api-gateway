@@ -291,7 +291,7 @@ describe('Create One Api', () => {
 			sinon.assert.calledOnce(dataConnector.insertOne);
 
 			sinon.assert.calledOnce(postSaveHook);
-			sinon.assert.calledWithExactly(postSaveHook, 10);
+			sinon.assert.calledWithExactly(postSaveHook, 10, sampleBody);
 		});
 	});
 
