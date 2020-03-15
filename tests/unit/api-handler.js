@@ -258,7 +258,7 @@ describe('API Handler', () => {
 
 			const myError = new Error('Some error');
 			processFake = sinon.stub().callsFake(async apiInstance => {
-				apiInstance.statusCode = 502;
+				apiInstance.setStatusCode(502);
 				throw myError;
 			});
 
@@ -271,7 +271,7 @@ describe('API Handler', () => {
 
 			const myError = new Error('Some error');
 			processFake = sinon.stub().callsFake(apiInstance => {
-				apiInstance.statusCode = 502;
+				apiInstance.setStatusCode(502);
 				throw myError;
 			});
 
@@ -284,7 +284,7 @@ describe('API Handler', () => {
 
 			const myError = new Error('Some error');
 			processFake = sinon.stub().callsFake(async apiInstance => {
-				apiInstance.statusCode = 404;
+				apiInstance.setStatusCode(404);
 				throw myError;
 			});
 
@@ -304,7 +304,7 @@ describe('API Handler', () => {
 
 			const myError = new Error('Some error');
 			processFake = sinon.stub().callsFake(apiInstance => {
-				apiInstance.statusCode = 404;
+				apiInstance.setStatusCode(404);
 				throw myError;
 			});
 
