@@ -172,7 +172,7 @@ describe('Get One Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, sampleRecord);
+			assert.deepStrictEqual(response.body, JSON.stringify(sampleRecord));
 
 			sinon.assert.calledOnce(dataConnector.getOne);
 		});
@@ -195,7 +195,7 @@ describe('Get One Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, 10);
+			assert.deepStrictEqual(response.body, JSON.stringify(10));
 
 			sinon.assert.calledOnce(dataConnector.getOne);
 

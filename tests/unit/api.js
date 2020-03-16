@@ -114,9 +114,9 @@ describe('API', () => {
 					'content-type': 'application/json',
 					'x-response-header': 'All good'
 				},
-				body: {
+				body: JSON.stringify({
 					my: 'response'
-				}
+				})
 			});
 		});
 	});

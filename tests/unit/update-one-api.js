@@ -253,9 +253,9 @@ describe('Update One Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, {
+			assert.deepStrictEqual(response.body, JSON.stringify({
 				id: 10
-			});
+			}));
 
 			sinon.assert.calledOnce(dataConnector.updateOne);
 		});
@@ -281,10 +281,10 @@ describe('Update One Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, {
+			assert.deepStrictEqual(response.body, JSON.stringify({
 				id: 10,
 				test: true
-			});
+			}));
 
 			sinon.assert.calledOnce(dataConnector.updateOne);
 
@@ -317,9 +317,9 @@ describe('Update One Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, {
+			assert.deepStrictEqual(response.body, JSON.stringify({
 				id: 10
-			});
+			}));
 
 			sinon.assert.calledOnce(dataConnector.updateOne);
 

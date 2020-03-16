@@ -197,7 +197,7 @@ describe('Get Many Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, sampleRecords);
+			assert.deepStrictEqual(response.body, JSON.stringify(sampleRecords));
 
 			sinon.assert.calledOnce(dataConnector.get);
 		});
@@ -220,7 +220,7 @@ describe('Get Many Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, [1, 2]);
+			assert.deepStrictEqual(response.body, JSON.stringify([1, 2]));
 
 			sinon.assert.calledOnce(dataConnector.get);
 
@@ -246,7 +246,7 @@ describe('Get Many Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, [1, 2]);
+			assert.deepStrictEqual(response.body, JSON.stringify([1, 2]));
 
 			sinon.assert.calledOnce(dataConnector.get);
 
@@ -278,7 +278,7 @@ describe('Get Many Api', () => {
 			const response = await runApi(myApi);
 
 			assert.deepStrictEqual(response.statusCode, 200);
-			assert.deepStrictEqual(response.body, ['The ID is 1', 'The ID is 2']);
+			assert.deepStrictEqual(response.body, JSON.stringify(['The ID is 1', 'The ID is 2']));
 
 			sinon.assert.calledOnce(dataConnector.get);
 

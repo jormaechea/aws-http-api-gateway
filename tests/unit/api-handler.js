@@ -57,9 +57,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 400,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 			sinon.assert.calledOnce(dataValidator);
 		});
@@ -72,9 +72,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 400,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 			sinon.assert.calledOnce(dataValidator);
 		});
@@ -117,9 +117,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 400,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 			sinon.assert.calledOnce(headersValidator);
 		});
@@ -132,9 +132,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 400,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 			sinon.assert.calledOnce(headersValidator);
 		});
@@ -177,9 +177,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 400,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 			sinon.assert.calledOnce(validate);
 		});
@@ -192,9 +192,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 400,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 			sinon.assert.calledOnce(validate);
 		});
@@ -292,9 +292,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 404,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 
 			sinon.assert.calledOnce(processFake);
@@ -312,9 +312,9 @@ describe('API Handler', () => {
 
 			assert.deepStrictEqual(response, {
 				statusCode: 404,
-				body: {
+				body: JSON.stringify({
 					message: 'Some error'
-				}
+				})
 			});
 
 			sinon.assert.calledOnce(processFake);
