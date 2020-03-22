@@ -101,7 +101,7 @@ class MyGetManyApi extends GetManyApi {
 		}));
 	}
 
-	formatRecord({ password, record }) {
+	formatRecord({ password, ...record }) {
 		return record;
 	}
 
