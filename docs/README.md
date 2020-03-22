@@ -10,7 +10,8 @@ If not, here's the table of content of this docs:
 
 - [Getting started](getting-started.md)
 - [Fetchers](fetchers.md)
-- [Base API: `Api`](base-api.md)
+- [API Handler: `ApiHandler`](api-handler.md)
+- [Generic API: `Api`](generic-api.md)
 - [Get many API: `GetManyApi`](get-many-api.md)
 - [Get one API: `GetOneApi`](get-one-api.md)
 - [Create one API: `CreateOneApi`](create-one-api.md)
