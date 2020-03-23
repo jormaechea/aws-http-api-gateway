@@ -1,6 +1,6 @@
 # Get One Api
 
-This API is intended to an specific record by it's ID. **IMPORTANT** API definition must set a path parameter `{id}`.
+This API is intended to fetch an specific record by it's ID. **IMPORTANT** API definition must set a path parameter `{id}`.
 
 This API will set a 404 HTTP status code if record does not exist.
 
