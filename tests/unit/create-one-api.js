@@ -227,10 +227,10 @@ describe('Create One Api', () => {
 			sinon.assert.calledOnce(dataConnector.insertOne);
 		});
 
-		it('Should call the formatResponse hook once and return it\'s return value', async () => {
+		it('Should call the formatResponseBody hook once and return it\'s return value', async () => {
 
 			class MyCreateOneApiWithHook extends MyCreateOneApi {
-				async formatResponse({ id }) {
+				async formatResponseBody({ id }) {
 					return {
 						id,
 						test: true
@@ -238,7 +238,7 @@ describe('Create One Api', () => {
 				}
 			}
 
-			sinon.spy(MyCreateOneApiWithHook.prototype, 'formatResponse');
+			sinon.spy(MyCreateOneApiWithHook.prototype, 'formatResponseBody');
 
 			dataConnector = {
 				insertOne: sinon.fake.resolves(10)
@@ -255,8 +255,8 @@ describe('Create One Api', () => {
 
 			sinon.assert.calledOnce(dataConnector.insertOne);
 
-			sinon.assert.calledOnce(MyCreateOneApiWithHook.prototype.formatResponse);
-			sinon.assert.calledWithExactly(MyCreateOneApiWithHook.prototype.formatResponse, { id: 10 });
+			sinon.assert.calledOnce(MyCreateOneApiWithHook.prototype.formatResponseBody);
+			sinon.assert.calledWithExactly(MyCreateOneApiWithHook.prototype.formatResponseBody, { id: 10 });
 		});
 	});
 
