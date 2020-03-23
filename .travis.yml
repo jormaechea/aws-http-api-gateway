@@ -14,9 +14,7 @@ jobs:
       node_js: '12'
       deploy:
         - provider: script
-          script: |
-                  npm install --save-dev coveralls@2
-                  nyc report --reporter=text-lcov | coveralls
+          script: bash .deploy/coverage.sh
     - stage: release
       if: (tag =~ ^v)
       git:
@@ -31,6 +29,4 @@ jobs:
             tags: true
             repo: jormaechea/aws-http-api-gateway
       after_deploy:
-        - |
-          npm install --save-dev coveralls@2
-          nyc report --reporter=text-lcov | coveralls
+        - bash .deploy/coverage.sh
