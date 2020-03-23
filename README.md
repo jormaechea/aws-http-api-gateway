@@ -41,7 +41,7 @@ functions:
 3. Code your handler
 
 ```js
-# src/apis/pets/get-many.handler
+// src/apis/pets/get-many.js
 'use strict';
 
 const { GetManyApi, ApiHandler } = require('aws-http-api-gateway');
