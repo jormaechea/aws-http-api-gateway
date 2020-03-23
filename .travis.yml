@@ -4,7 +4,6 @@ node_js:
   - '12'
 cache: npm
 script:
-  - npm run lint
   - npm run coverage:ci
 jobs:
   include:
@@ -13,18 +12,14 @@ jobs:
       git:
         depth: 1
       node_js: '12'
-      before_install:
-        - npm i -g makeshift && makeshift -r https://registry.npmjs.org
       deploy:
         - provider: npm
           edge: true
-          email:
-            secure: 'NqhgyPgQYZujCp4k4jTIh8QLxetfeLwBKHGQEHTTeYW71glykoZ99lpXpZy7nmVW1Zx4h3F+SHPTfinjxHzfH7AGCJfhpZQrFQOZ4XBiafo5Ht5CCMfbIodl0K6M0RlM/O25o5WmgOGEqnbcjbw1GBHDx2nbKaPymLLWVP8cK2TkHZfNat3t3Lm2mY9iqB2UjNZt3Zk4DUOjngkP8DheJFOSPsRNtkHaOHb2ST2OyivzGMCyt/mmkP7qXu1+SIedvHgpgPYnJXM1Y/SyLDqinir75tYsLHatasXaDwItaLUHYY96eiBZZ2aheWC6R1lwaK8R++N7DKTmuf/yfE/0gihzNF/krE6xBHgqb3knm1zhV1IhxWCeBq5oPLOrjEkc7ms4TSlM3RSfZDa7hdEzDqX9JAXTbhovXXTonkSzASel2q1I9w8T/lDDMOEgMSv8lXRyS6/f3Z9K2za+CmXza+EdvUemGwXiaGC7ISROrZyTWjsSQ1iL6kgGVZ8S6QYDaJ3zQFQ8ZHAduyO7bLsH4mu8MbPRyheIIjdwyhO6kxengz5dXzj4ZNuq3iu6A6OP5CrL+xVdcBX7o7szk/BQJQWtFtQ+fdvN1mBfJXaCqK6+xxqqPhPQywCSy90w2WrqF2YJqR435QbrSajR7wXRsxaHHqTJy7i+3SmgISJkeY8='
-          api_key:
-            secure: 'Geez5dJyZhytQFh8uP4TylZp0pP3zNCzj1RPAT66+olq6tS2eriud6uNWCBr287ZkjV6LiKbkmo4uD1QoFq/WOiRBsSNi8YYeFVEaTJsT01CQzUNKGJ1wyJT9UNxdGIbxGWxWM+ySwnYw8jYpy5ukq/vWxbqGK5DU5r0tNEy8CEQB29a1E5kRIPyByobzMP5qRMNbZdBl/qjxYQlkUyM3SuqdTQF2qSfcQx4bZGAK/YhEdbST9UZhCwkbYZ9EhKBGSAQ+O7OTZ7dCQa0KVpWxFvm+TbO6x9UMl5gzGzIwu1687tFCFubqeeMbbhgIAX2qrC3RQn/UA8sNWjxwzSN4NyfmkG/qKY8iwYzl3k1YlOSLV1yq1OtMQNempaRCzcPmsFSYJJsn0/43GPr1Kak24emoqHh4A/YuJ4az2FL1ZGpWS60T0YxbMvFEi0Z7FmOkKqFOLxIu52/vrS5DH4wSXI2d45gRKVL+7qjb8fduJVVQ+8UkXwCTAE/eJtr24UKsn03qBpvZwASGWT/+yXg0gdpgMTgoebM3XL5rtShCyuxguv1jiYAPD6N1cTaWfDkwpiktU1mYGU3NAN1Y4zSxVi4LVbuzXQBEt3nE2sky2W1O3oNDoux9i2/BgmuwcUt5G23/2D5SlwhW3CxyoDBRNidQr3XnSWM7AoRgxShfI4='
-          on:
-            tags: true
-            repo: jormaechea/aws-http-api-gateway
+          registry: https://registry.npmjs.org
+          access: public
+          # on:
+          #   tags: true
+          #   repo: jormaechea/aws-http-api-gateway
         - provider: script
           script: |
                   # Upload coverage to coveralls
@@ -32,6 +27,6 @@ jobs:
                     npm install --save-dev coveralls@2
                     nyc report --reporter=text-lcov | coveralls
                   fi
-          on:
-            tags: true
-            repo: jormaechea/aws-http-api-gateway
+          # on:
+          #   tags: true
+          #   repo: jormaechea/aws-http-api-gateway
