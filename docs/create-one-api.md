@@ -26,7 +26,15 @@ This **required** getter must return a [Fetcher](fetchers.md) with at least the 
 
 ### `formatRecord(record)`
 
-This optional method receives the record returned by the fetcher and must return the formatted record. It won't be called if record cannot be fetched.
+This optional method receives the record received as the request body and must return the formatted record.
+
+### `postSaveHook(id, formattedRecord)`
+
+This optional method receives the id and the record (formatted if `formatRecord()` method is set), and may be used to notify about the creation, updating some cache, or whatever you want.
+
+### `formatResponseBody(responseBody)`
+
+This optional method receives the default response body (an object like this: `{ id }`), and must return the new response body.
 
 ### Others
 
