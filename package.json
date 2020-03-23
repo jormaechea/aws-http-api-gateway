@@ -6,9 +6,10 @@
   "scripts": {
     "start": "sls offline",
     "coverage": "nyc npm test",
-    "coverage:report": "nyc npm run test:report",
+    "coverage:ci": "nyc npm run test:ci",
     "lint": "eslint ./lib ./tests",
     "test": "export TEST_ENV=true; mocha --exit -R nyan --recursive tests/unit/",
+    "test:ci": "export TEST_ENV=true; mocha --exit --recursive tests/unit/",
     "test-watch": "npm test -- -w"
   },
   "files": [
