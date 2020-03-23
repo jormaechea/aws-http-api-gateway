@@ -1,6 +1,6 @@
 {
   "name": "aws-http-api-gateway",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Framework to handle AWS HTTP APIs with AWS Lambda",
   "main": "lib/index.js",
   "scripts": {
