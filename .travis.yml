@@ -7,6 +7,16 @@ script:
   - npm run coverage:ci
 jobs:
   include:
+    - stage: master-coverage
+      if: (branch = master)
+      git:
+        depth: 1
+      node_js: '12'
+      deploy:
+        - provider: script
+          script: |
+                  npm install --save-dev coveralls@2
+                  nyc report --reporter=text-lcov | coveralls
     - stage: release
       if: (tag =~ ^v)
       git:
@@ -22,8 +32,5 @@ jobs:
             repo: jormaechea/aws-http-api-gateway
       after_deploy:
         - |
-          # Upload coverage to coveralls
-          if [[ -d .nyc_output ]]; then
-            npm install --save-dev coveralls@2
-            nyc report --reporter=text-lcov | coveralls
-          fi
+          npm install --save-dev coveralls@2
+          nyc report --reporter=text-lcov | coveralls
