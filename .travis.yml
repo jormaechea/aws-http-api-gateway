@@ -18,9 +18,8 @@ jobs:
           registry: https://registry.npmjs.org
           access: public
           on:
-            branch: master
-          #   tags: true
-          #   repo: jormaechea/aws-http-api-gateway
+            tags: true
+            repo: jormaechea/aws-http-api-gateway
         - provider: script
           script: |
                   # Upload coverage to coveralls
@@ -29,6 +28,5 @@ jobs:
                     nyc report --reporter=text-lcov | coveralls
                   fi
           on:
-            branch: master
-          #   tags: true
-          #   repo: jormaechea/aws-http-api-gateway
+            tags: true
+            repo: jormaechea/aws-http-api-gateway
