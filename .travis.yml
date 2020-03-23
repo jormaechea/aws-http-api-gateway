@@ -20,13 +20,10 @@ jobs:
           on:
             tags: true
             repo: jormaechea/aws-http-api-gateway
-        - provider: script
-          script: |
-                  # Upload coverage to coveralls
-                  if [[ -d .nyc_output ]]; then
-                    npm install --save-dev coveralls@2
-                    nyc report --reporter=text-lcov | coveralls
-                  fi
-          on:
-            tags: true
-            repo: jormaechea/aws-http-api-gateway
+      after_deploy:
+        - |
+          # Upload coverage to coveralls
+          if [[ -d .nyc_output ]]; then
+            npm install --save-dev coveralls@2
+            nyc report --reporter=text-lcov | coveralls
+          fi
