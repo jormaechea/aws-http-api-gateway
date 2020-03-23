@@ -12,7 +12,7 @@ Test a working [demo](https://github.com/jormaechea/aws-http-api-gateway-demo) f
 
 # Docs
 
-The framework complete docs can be found [here](docs/).
+The framework complete docs can be found [here](docs/README.md).
 
 ## Quick start
 
