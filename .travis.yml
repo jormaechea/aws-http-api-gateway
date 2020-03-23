@@ -14,6 +14,7 @@ jobs:
       node_js: '12'
       deploy:
         - provider: script
+          edge: true
           script: bash .deploy-coverage.sh
     - stage: release
       if: (tag =~ ^v)
