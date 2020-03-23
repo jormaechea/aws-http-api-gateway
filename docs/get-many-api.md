@@ -47,6 +47,10 @@ This optional method receives the array of records returned by the fetcher and m
 
 This optional method, if defined, will be called once for each record. It must return the formatted record for each call.
 
+### Others
+
+You can also set the `headersValidator()` and `validate()` methods. `dataValidator()` method shouldn't be overriden, but in case you do so, be sure to call `super.dataValidator()` first.
+
 ## Example
 
 This is a complete example of a Get many API:

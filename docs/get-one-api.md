@@ -21,6 +21,10 @@ This **required** getter must return a [Fetcher](fetchers.md) with at least the 
 
 This optional method receives the record returned by the fetcher and must return the formatted record. It won't be called if record cannot be fetched.
 
+### Others
+
+You can also set the `headersValidator()` and `validate()` methods. `dataValidator()` method shouldn't be overriden, but in case you do so, be sure to call `super.dataValidator()` first.
+
 ## Example
 
 This is a complete example of a Get one API:
