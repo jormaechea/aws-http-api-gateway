@@ -15,6 +15,11 @@
   "files": [
     "lib/"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jormaechea/aws-http-api-gateway.git"
+  },
+  "homepage": "https://github.com/jormaechea/aws-http-api-gateway#readme",
   "keywords": [
     "aws",
     "api gateway",
