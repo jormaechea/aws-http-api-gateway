@@ -90,6 +90,16 @@ describe('Helpers', () => {
 						pageSize: 50
 					});
 				});
+
+				it('Should return the specified page number and size as stringified numbers', () => {
+					const paging = new Paging();
+					const result = paging.parseRequestPagingParams('2', '50');
+
+					assert.deepStrictEqual(result, {
+						pageNumber: 2,
+						pageSize: 50
+					});
+				});
 			});
 		});
 
