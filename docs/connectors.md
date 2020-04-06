@@ -1,6 +1,6 @@
-# Fetchers
+# Connector
 
-So, what is a fetcher? It's a connector between your API and your data. Connectors should tipically have the following methods/functions:
+So, what is a connector? It's a connector between your API and your data. Connectors should tipically have the following methods/functions:
 
 - `get()`: For get many APIs
 - `getOne()`: For get one APIs
@@ -17,22 +17,30 @@ The signature of this methods must be the following:
 - `pageNumber` and `pageSize` are both integers that indicate the size (by default 10) and the number (starting in page 1) intended to retrieve.
 - `sortBy` and `sortCriteria` indicate the field to sort by and the criteria to use on that field (`asc` or `desc`)
 
+It must return an array of objects (or an empty array if no records are found)
+
 ### `getOne(id)`
 
 - `id` is a string that identifies a unique record in your database
 
+It must return an objects or null if the record is not found
+
 ### `insertOne(record)`
 
 - `record` is the object you want to store in your database
+
+It must return the ID of the inserted record
 
 ### `updateOne(id, record)`
 
 - `id` is a string that identifies a unique record in your database
 - `record` is the object you want to update in your database, for the record with that `id`
 
+It must return the amount of updated documents (one or zero)
+
 ## Example
 
-This is a very simple example of a basic fetcher of a mongodb based Pets database.
+This is a very simple example of a basic connector of a mongodb based Pets database.
 
 ```js
 // We assume db connections to be handled in some other file for simplicity
@@ -42,7 +50,7 @@ const { mongodb, parseFiltersForMongo } = require('./mongodb');
 const dbName = 'my-db';
 const collectionName = 'pets';
 
-module.exports = class PetsFetcher {
+module.exports = class PetsConnector {
 
 	get collection() {
 		return mongodb
@@ -59,7 +67,7 @@ module.exports = class PetsFetcher {
 			.toArray();
 	}
 
-	findOne(id) {
+	getOne(id) {
 		return this.collection
 			.findOne({ _id: id });
 	}

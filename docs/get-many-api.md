@@ -37,11 +37,11 @@ This optional getter should return an array of the allowed fields to sort by.
 
 ### `get dataConnector()`
 
-This **required** getter must return a [Fetcher](fetchers.md) with at least the `get()` method.
+This **required** getter must return a [Connector](connectors.md) with at least the `get()` method.
 
 ### `formatRecords(records)`
 
-This optional method receives the array of records returned by the fetcher and must return a new array with the formatted records.
+This optional method receives the array of records returned by the connector and must return a new array with the formatted records.
 
 ### `formatRecord(record)`
 
@@ -64,12 +64,12 @@ const {
 	}
 } = require('aws-http-api-gateway');
 
-const myFetcher = require('./my-fetcher');
+const myConnector = require('./my-connector');
 
 class MyGetManyApi extends GetManyApi {
 
 	get dataConnector() {
-		return myFetcher;
+		return myConnector;
 	}
 
 	get filtersDefinition() {

@@ -22,7 +22,7 @@ This optional method receives the body as an argument and should throw if it's i
 
 ### `get dataConnector()`
 
-This **required** getter must return a [Fetcher](fetchers.md) with at least the `updateOne()` method.
+This **required** getter must return a [Connector](connectors.md) with at least the `updateOne()` method.
 
 ### `formatRecord(record)`
 
@@ -50,12 +50,12 @@ const {
 	ApiHandler
 } = require('aws-http-api-gateway');
 
-const myFetcher = require('./my-fetcher');
+const myConnector = require('./my-connector');
 
 class MyUpdateOneApi extends UpdateOneApi {
 
 	get dataConnector() {
-		return myFetcher;
+		return myConnector;
 	}
 
 	bodyValidator(body) {

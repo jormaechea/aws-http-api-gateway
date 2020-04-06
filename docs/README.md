@@ -9,7 +9,7 @@ If your just trying to do a proof of concept, you can see the quick start in the
 If not, here's the table of content of this docs:
 
 - [Getting started](getting-started.md)
-- [Fetchers](fetchers.md)
+- [Connectors](connectors.md)
 - [API Handler: `ApiHandler`](api-handler.md)
 - [Generic API: `Api`](generic-api.md)
 - [Get many API: `GetManyApi`](get-many-api.md)

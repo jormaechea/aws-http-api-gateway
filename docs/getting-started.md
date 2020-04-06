@@ -30,12 +30,12 @@ Your API files will have a structure similar to this one (ie, for a get many ope
 ```js
 const { GetManyApi, ApiHandler } = require('aws-http-api-gateway');
 
-const YourFetcher = require('./some-path');
+const YourConnector = require('./some-path');
 
 class YourGetManyApi extends GetManyApi {
 
 	get dataConnector() {
-		return YourFetcher;
+		return YourConnector;
 	}
 }
 
@@ -50,10 +50,10 @@ The first line just imports the API you want to implement and the HTTP API handl
 const { GetManyApi, ApiHandler } = require('aws-http-api-gateway');
 ```
 
-Then, we have an import of what we will call a fetcher. This is the connector between you APIs, and your data storage or database.
+Then, we have an import of what we will call a connector. This is the connector between you APIs, and your data storage or database.
 
 ```js
-const YourFetcher = require('./some-path');
+const YourConnector = require('./some-path');
 ```
 
 Next thing we have, is the declaration of you API, extending from a base API and customizing it (we will see this with more details later). Each base API has it's own extendable points, we will discuss each of them.
@@ -62,7 +62,7 @@ Next thing we have, is the declaration of you API, extending from a base API and
 class YourGetManyApi extends GetManyApi {
 
 	get dataConnector() {
-		return YourFetcher;
+		return YourConnector;
 	}
 }
 ```

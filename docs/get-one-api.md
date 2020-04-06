@@ -15,11 +15,11 @@ Each one of this methods has an specific role in order to have standarized APIs:
 
 ### `get dataConnector()`
 
-This **required** getter must return a [Fetcher](fetchers.md) with at least the `getOne()` method.
+This **required** getter must return a [Connector](connectors.md) with at least the `getOne()` method.
 
 ### `formatRecord(record)`
 
-This optional method receives the record returned by the fetcher and must return the formatted record. It won't be called if record cannot be fetched.
+This optional method receives the record returned by the connector and must return the formatted record. It won't be called if record cannot be fetched.
 
 ### Others
 
@@ -35,12 +35,12 @@ const {
 	ApiHandler
 } = require('aws-http-api-gateway');
 
-const myFetcher = require('./my-fetcher');
+const myConnector = require('./my-connector');
 
 class MyGetOneApi extends GetOneApi {
 
 	get dataConnector() {
-		return myFetcher;
+		return myConnector;
 	}
 
 	formatRecord({ password, ...record }) {

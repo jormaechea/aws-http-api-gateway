@@ -83,7 +83,7 @@ This is a complete example of a generic API:
 ```js
 const { Api, ApiHandler } = require('aws-http-api-gateway');
 
-const myFetcher = require('./my-fetcher');
+const myConnector = require('./my-connector');
 
 class MyApi extends Api {
 
@@ -98,14 +98,14 @@ class MyApi extends Api {
 	}
 
 	async validate() {
-		const someDependency = await myFetcher.getOne(this.pathParameters.id);
+		const someDependency = await myConnector.getOne(this.pathParameters.id);
 
 		if(!someDependency)
 			throw new Error(`Dependency with id ${this.pathParameters.id} does not exist`);
 	}
 
 	async process() {
-		const updated = await myFetcher.updateOne(this.pathParameters.id, {
+		const updated = await myConnector.updateOne(this.pathParameters.id, {
 			...this.data,
 			status: 'active'
 		});
